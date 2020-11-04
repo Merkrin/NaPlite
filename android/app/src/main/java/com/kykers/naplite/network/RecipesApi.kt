@@ -41,7 +41,7 @@ interface RecipesApi {
     /**
      * Получение рецептов по строковому запросу.
      */
-    @GET("recipes/search?")
+    @GET("search/get?")
     suspend fun getRecipes(
         @Query("q") query: String,
         @Query("order") order: Order = Order.DATE,
