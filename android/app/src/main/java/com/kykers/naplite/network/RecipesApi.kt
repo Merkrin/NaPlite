@@ -1,8 +1,8 @@
 package com.kykers.naplite.network
 
-import com.kykers.naplite.objects.Category
 import com.kykers.naplite.objects.Order
 import com.kykers.naplite.objects.RecipeFull
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,36 +17,37 @@ interface RecipesApi {
      * Получение рецепта по Id.
      */
     @GET("recipe/get?")
-    suspend fun getRecipe(@Query("id") id: Int): ResponseWrapper<RecipeFull>
+    fun getRecipe(@Query("id") id: Int): Call<RecipeFull>
 
     /**
      * Получение рецептов через сортировку и количество пропущенных.
      */
     @GET("recipes/get?")
-    suspend fun getRecipes(
+    fun getRecipes(
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0
-    ): ResponseWrapper<RecipesShortWrapper>
+    ): Call<RecipesShortWrapper>
+
 
     /**
      * Получение рецептов через сортировку, количество пропущенных и номер категории.
      */
     @GET("recipes/get?")
-    suspend fun getRecipes(
+    fun getRecipes(
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0,
         @Query("category") categoryId: Int,
-    ): ResponseWrapper<RecipesShortWrapper>
+    ): Call<RecipesShortWrapper>
 
     /**
      * Получение рецептов по строковому запросу.
      */
     @GET("search/get?")
-    suspend fun getRecipes(
+    fun getRecipes(
         @Query("q") query: String,
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0,
-    ): ResponseWrapper<RecipesShortWrapper>
+    ): Call<RecipesShortWrapper>
 
     // TODO: @GET("categories")
 

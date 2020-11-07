@@ -1,5 +1,6 @@
 package com.kykers.naplite.objects
 
+import retrofit2.Call
 import java.io.Serializable
 
 /**
@@ -49,4 +50,5 @@ data class RecipeFull(
     fun havePrepMinutes(): Boolean {
         return prepMinutes > 0
     }
+
 }
