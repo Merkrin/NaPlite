@@ -1,5 +1,6 @@
 package com.kykers.naplite.network
 
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Companion.invoke
 import okhttp3.OkHttpClient
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @author goga133
  */
 object NetworkService {
-    private const val BASE_URL = "https://188.120.237.36/"
+    private const val BASE_URL = "https://api.onthestove.ru/"
 
     private val baseInterceptor: Interceptor = invoke { chain ->
         val newUrl = chain
@@ -36,9 +37,10 @@ object NetworkService {
         .build()
 
     fun retrofitService(): RecipesApi {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
             .create(RecipesApi::class.java)
