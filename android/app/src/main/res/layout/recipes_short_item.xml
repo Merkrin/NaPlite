@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:background="@drawable/back_recipe_short_item"
+    android:minHeight="90dp"
+    android:maxHeight="200dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_weight="15"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </View>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:layout_weight="70"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <View
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_weight="72"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:fontFamily="verdana"
+                android:textStyle="bold"
+                android:id="@+id/tv_recipes_short_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="16sp"
+                android:maxLines="2"
+                app:autoSizeMaxTextSize="19sp">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/comment_icon"
+                android:drawablePadding="2dp"
+                android:fontFamily="verdana"
+                android:id="@+id/tv_recipes_short_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="15sp">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textStyle="italic"
+                android:layout_gravity="bottom"
+                android:fontFamily="verdana"
+                android:id="@+id/tv_recipes_short_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="15sp">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:saveEnabled="true"
+            android:id="@+id/civ_recipes_short"
+            android:layout_weight="25"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <View
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </View>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_weight="15"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </View>
+</androidx.appcompat.widget.LinearLayoutCompat>
