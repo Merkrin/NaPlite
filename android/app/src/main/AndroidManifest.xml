@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NaPlite">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation_layer.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

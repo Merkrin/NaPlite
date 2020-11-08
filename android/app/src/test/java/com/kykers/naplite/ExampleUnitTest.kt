@@ -1,8 +1,7 @@
 package com.kykers.naplite
 
-import android.util.Log
-import com.kykers.naplite.network.NetworkService
-import com.kykers.naplite.objects.Order
+import com.kykers.naplite.business_layer.network.NetworkService
+import com.kykers.naplite.business_layer.objects.Order
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
