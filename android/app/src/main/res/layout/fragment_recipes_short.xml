@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    android:background="@color/background_color"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation_layer.recipes_short.presentation.RecipesFragment">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center"
+            android:text="Всякая всячина (фильтры и т.п)"
+            android:layout_weight="7"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="93"
+            android:id="@+id/rv_recipes_short"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:visibility="invisible"
+        android:layout_gravity="bottom"
+        android:background="@color/status_layout_color"
+        android:id="@+id/status_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_layout_height">
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            android:layout_marginVertical="@dimen/progress_bar_alignment"
+            android:id="@+id/cpv_loading"
+            android:layout_gravity="center"
+            app:cpv_indeterminate="true"
+            app:cpv_animAutostart="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.github.rahatarmanahmed.cpv.CircularProgressView>
+
+        <RelativeLayout
+            android:layout_gravity="center"
+            android:id="@+id/lay_try_again"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:paddingEnd="@dimen/progress_bar_and_padding"
+                android:layout_centerInParent="true"
+                android:id="@+id/tv_try_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:layout_marginStart="@dimen/moving_progress_bar"
+                android:paddingBottom="@dimen/progress_bar_alignment"
+                app:cpv_color="@color/progress_bar_color"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_try_again"
+                app:cpv_indeterminate="true"
+                app:cpv_animAutostart="true"
+                android:layout_width="@dimen/progress_bar_size"
+                android:layout_height="@dimen/progress_bar_size">
+            </com.github.rahatarmanahmed.cpv.CircularProgressView>
+
+        </RelativeLayout>
+
+
+
+    </FrameLayout>
+
+
+</FrameLayout>

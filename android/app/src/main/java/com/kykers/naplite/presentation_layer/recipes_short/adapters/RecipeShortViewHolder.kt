@@ -1,7 +1,5 @@
-package com.kykers.naplite.presentation_layer.adapters
+package com.kykers.naplite.presentation_layer.recipes_short.adapters
 
-import android.net.Uri
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kykers.naplite.business_layer.objects.RecipeShort
@@ -11,7 +9,6 @@ import java.time.ZoneId
 
 /**
  * Холдер RecipeShort'ов
- *
  *
  * @author DmitriiShkudov
  */

@@ -6,6 +6,7 @@ import okhttp3.Interceptor.Companion.invoke
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Сетевой синглтон.
@@ -33,6 +34,7 @@ object NetworkService {
 
     private val client: OkHttpClient = OkHttpClient
         .Builder()
+        .readTimeout(3, TimeUnit.SECONDS)
         .addInterceptor(baseInterceptor)
         .build()
 
