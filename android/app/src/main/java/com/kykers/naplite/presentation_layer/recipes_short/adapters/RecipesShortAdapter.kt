@@ -1,11 +1,9 @@
-package com.kykers.naplite.presentation_layer.adapters
+package com.kykers.naplite.presentation_layer.recipes_short.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.kykers.naplite.R
 import com.kykers.naplite.business_layer.objects.RecipeShort
 
@@ -23,10 +21,10 @@ class RecipesShortAdapter: PagedListAdapter<RecipeShort, RecipeShortViewHolder>(
 
         val CALLBACK = object: DiffUtil.ItemCallback<RecipeShort>() {
 
-            override fun areItemsTheSame(oldItem: RecipeShort, newItem: RecipeShort) =
-                oldItem.title == newItem.title
+                override fun areItemsTheSame(oldItem: RecipeShort, newItem: RecipeShort) =
+                    oldItem.title == newItem.title
 
-            override fun areContentsTheSame(oldItem: RecipeShort, newItem: RecipeShort) = false
+                override fun areContentsTheSame(oldItem: RecipeShort, newItem: RecipeShort) = false
 
             }
     }
