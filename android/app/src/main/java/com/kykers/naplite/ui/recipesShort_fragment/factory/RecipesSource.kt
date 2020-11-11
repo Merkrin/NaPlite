@@ -1,19 +1,9 @@
-package com.kykers.naplite.presentation_layer.recipes_short.adapters.data
+package com.kykers.naplite.ui.recipesShort_fragment.factory
 
-import android.os.Parcel
-import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.kykers.naplite.business_layer.objects.Order
 import com.kykers.naplite.business_layer.objects.RecipeShort
-import com.kykers.naplite.objects.Helper.requireValue
-import com.kykers.naplite.presentation_layer.recipes_short.State
-import com.kykers.naplite.presentation_layer.recipes_short.presentation.RecipesFragment
-import com.kykers.naplite.presentation_layer.recipes_short.presentation.RecipesViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.kykers.naplite.ui.recipesShort_fragment.presentation.RecipesViewModel
 
 
 /**
@@ -22,28 +12,25 @@ import kotlinx.coroutines.withContext
  *
  * @author DmitriiShkudov
  */
-class RecipesSource(private val viewModel: RecipesViewModel): PositionalDataSource<RecipeShort>() {
+class RecipesSource(private val viewModel: RecipesViewModel) : PositionalDataSource<RecipeShort>() {
 
     companion object {
-
         const val AVAILABLE_LOAD_CAPACITY = 20
-
     }
 
 
     /**
      * Загрузка первой порции
      * */
-    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<RecipeShort>) {
+    override fun loadInitial(
+        params: LoadInitialParams,
+        callback: LoadInitialCallback<RecipeShort>
+    ) {
 
         val fixedSize = if (params.requestedLoadSize >= AVAILABLE_LOAD_CAPACITY) {
-
             AVAILABLE_LOAD_CAPACITY
-
         } else {
-
             params.requestedLoadSize
-
         }
 
         /**
@@ -55,13 +42,9 @@ class RecipesSource(private val viewModel: RecipesViewModel): PositionalDataSour
          * Если порция загрузилась, то вызываем callback, иначе - пробуем заново
          * */
         if (part.isNotEmpty()) {
-
             callback.onResult(part, params.requestedStartPosition)
-
         } else {
-
             loadInitial(params, callback)
-
         }
 
     }
@@ -71,10 +54,8 @@ class RecipesSource(private val viewModel: RecipesViewModel): PositionalDataSour
      * */
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<RecipeShort>) {
 
-        if (viewModel.state.requireValue() != State.NETWORK_ERROR) {
-
+        if (viewModel.state.value != State.NETWORK_ERROR) {
             viewModel.state.postValue(State.LOADING)
-
         }
 
         /**
@@ -86,17 +67,15 @@ class RecipesSource(private val viewModel: RecipesViewModel): PositionalDataSour
          * Если порция загрузилась, то вызываем callback, иначе - пробуем заново
          * */
         if (part.isNotEmpty()) {
-
             callback.onResult(part)
 
         } else {
-
             loadRange(params, callback)
-
         }
 
     }
 
-    private fun execute(from: Int, size: Int) = viewModel.NetworkRepository().getRecipes(Order.COMMENTS, from, size)
+    private fun execute(from: Int, size: Int) =
+        viewModel.NetworkRepository().getRecipes(Order.COMMENTS, from, size)
 
 }

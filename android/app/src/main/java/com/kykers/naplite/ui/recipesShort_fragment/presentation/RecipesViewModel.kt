@@ -1,14 +1,13 @@
-package com.kykers.naplite.presentation_layer.recipes_short.presentation
+package com.kykers.naplite.ui.recipesShort_fragment.presentation
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.Config
 import androidx.paging.LivePagedListBuilder
 import com.kykers.naplite.business_layer.network.NetworkService
 import com.kykers.naplite.business_layer.objects.Order
-import com.kykers.naplite.presentation_layer.recipes_short.State
-import com.kykers.naplite.presentation_layer.recipes_short.adapters.data.RecipesSourceFactory
+import com.kykers.naplite.ui.recipesShort_fragment.factory.State
+import com.kykers.naplite.ui.recipesShort_fragment.factory.RecipesSourceFactory
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -16,10 +15,8 @@ import java.net.UnknownHostException
 class RecipesViewModel : ViewModel() {
 
     private companion object {
-
         const val PAGE_SIZE = 20
         const val PREFETCH_DISTANCE = 10
-
     }
 
     /**  LiveData RecipeShort'ов, фабрика догрузки рецептов и конфигурация,
@@ -32,8 +29,7 @@ class RecipesViewModel : ViewModel() {
 
     private var config = Config(PAGE_SIZE, PREFETCH_DISTANCE, enablePlaceholders = false)
 
-    internal var recipesShortList
-            = LivePagedListBuilder(factory, config).build()
+    internal var recipesShortList = LivePagedListBuilder(factory, config).build()
 
     internal val state = MutableLiveData<State>().apply {
         value = State.LOADING
@@ -71,21 +67,15 @@ class RecipesViewModel : ViewModel() {
                 }
             }
 
-        }
-        catch (e: SocketTimeoutException) {
-
+        } catch (e: SocketTimeoutException) {
             state.postValue(State.NETWORK_ERROR)
             emptyList()
 
-        }
-        catch (e: UnknownHostException) {
-
+        } catch (e: UnknownHostException) {
             state.postValue(State.NETWORK_ERROR)
             emptyList()
 
-        }
-        catch (e: Throwable) {
-
+        } catch (e: Throwable) {
             e.printStackTrace()
             state.postValue(State.UNKNOWN_ERROR)
             emptyList()

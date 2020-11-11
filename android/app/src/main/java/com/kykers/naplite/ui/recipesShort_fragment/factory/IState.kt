@@ -1,8 +1,6 @@
-package com.kykers.naplite.presentation_layer.recipes_short
+package com.kykers.naplite.ui.recipesShort_fragment.factory
 
-import androidx.lifecycle.MutableLiveData
-
-
+import com.kykers.naplite.ui.recipesShort_fragment.presentation.RecipesFragment
 /**
  * Интерфейс, определяющий возможный вид UI
  * @author DmitriiShkudov
@@ -11,11 +9,9 @@ import androidx.lifecycle.MutableLiveData
  * */
 
 interface IState {
-
     fun updated()
     fun loading()
     fun networkError()
     fun serverError()
     fun unknownError()
-
 }

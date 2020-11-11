@@ -1,10 +1,10 @@
-package com.kykers.naplite.presentation_layer.recipes_short.adapters
+package com.kykers.naplite.ui.recipesShort_fragment.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kykers.naplite.business_layer.objects.RecipeShort
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.recipes_short_item.view.*
+import kotlinx.android.synthetic.main.item_recipe_short.view.*
 import java.time.ZoneId
 
 /**
@@ -15,7 +15,8 @@ import java.time.ZoneId
 
 class RecipeShortViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun binding(recipe: RecipeShort) { with(itemView) {
+    fun binding(recipe: RecipeShort) {
+        with(itemView) {
 
             // TODO: исправить (на бэке?)
             val fixedRecipeTitle = recipe.title?.replace("&quot;", "\"")
@@ -26,12 +27,9 @@ class RecipeShortViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
             tv_recipes_short_title.text = fixedRecipeTitle
             tv_recipes_short_comments.text = recipe.comments.toString()
-            tv_recipes_short_date.text = recipe.
-                                         pubDateTime.
-                                         toInstant().
-                                         atZone(ZoneId.systemDefault()).
-                                         toLocalDate().
-                                         toString()
+            tv_recipes_short_date.text =
+                recipe.pubDateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    .toString()
 
         }
     }

@@ -1,6 +1,6 @@
 package com.kykers.naplite.business_layer.network
 
-import com.kykers.naplite.business_layer.network.response_wrappers.RecipesShortWrapper
+import com.kykers.naplite.business_layer.network.wrappers.RecipesShortWrapper
 import com.kykers.naplite.business_layer.objects.Order
 import com.kykers.naplite.business_layer.objects.RecipeFull
 import retrofit2.Call

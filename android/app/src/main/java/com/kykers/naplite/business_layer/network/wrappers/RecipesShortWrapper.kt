@@ -1,6 +1,6 @@
-package com.kykers.naplite.network
+package com.kykers.naplite.business_layer.network.wrappers
 
-import com.kykers.naplite.objects.RecipeShort
+import com.kykers.naplite.business_layer.objects.RecipeShort
 
 /**
  * Класс - обёртка под RecipeShort.

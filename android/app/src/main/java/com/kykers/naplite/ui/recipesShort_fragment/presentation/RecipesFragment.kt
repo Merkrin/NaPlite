@@ -1,25 +1,17 @@
-package com.kykers.naplite.presentation_layer.recipes_short.presentation
+package com.kykers.naplite.ui.recipesShort_fragment.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.Config
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PositionalDataSource
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kykers.naplite.R
-import com.kykers.naplite.business_layer.objects.RecipeShort
-import com.kykers.naplite.presentation_layer.recipes_short.IState
-import com.kykers.naplite.presentation_layer.recipes_short.State
-import com.kykers.naplite.presentation_layer.recipes_short.adapters.RecipesShortAdapter
-import com.kykers.naplite.presentation_layer.recipes_short.adapters.data.RecipesSourceFactory
+import com.kykers.naplite.ui.recipesShort_fragment.factory.IState
+import com.kykers.naplite.ui.recipesShort_fragment.factory.State
+import com.kykers.naplite.ui.recipesShort_fragment.adapter.RecipesShortAdapter
 import kotlinx.android.synthetic.main.fragment_recipes_short.*
-import okhttp3.internal.platform.android.BouncyCastleSocketAdapter.Companion.factory
 
 
 class RecipesFragment : Fragment(), IState {
