@@ -13,13 +13,6 @@ import java.util.*
  *
  * @author goga133
  */
-data class RecipesShortWrapper(@SerializedName("count")
-                               var count: Int?,
-                               @SerializedName("items")
-                               var recipes: List<RecipeShort?>?) {
 
+data class RecipesShortWrapper(val count: Int?, val recipes: LinkedList<RecipeShort>)
 
-
-
-
-}

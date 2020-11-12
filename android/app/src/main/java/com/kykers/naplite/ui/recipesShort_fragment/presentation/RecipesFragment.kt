@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_recipes_short.*
 
 class RecipesFragment : Fragment() {
 
+
     private val recipesViewModel by lazy { ViewModelProvider(this).get(RecipesViewModel::class.java) }
 
     private val recipesShortAdapter = RecipesShortAdapter()
@@ -38,21 +39,20 @@ class RecipesFragment : Fragment() {
 
         /** Реакция на изменение состояний */
         recipesViewModel.recipesShortEvent.observe(viewLifecycleOwner) {
-
-            Log.i("STATUS IN OBSERVE", it.status.name)
-
+            
             when (it.status) {
 
                 LOADING -> loading()
                 SUCCESS -> updated()
                 ERROR -> error()
 
-            }
 
+            }
         }
 
         return inflater.inflate(R.layout.fragment_recipes_short, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,13 +79,10 @@ class RecipesFragment : Fragment() {
     }
 
     private fun error() {
-
         lay_try_again.visibility = View.VISIBLE
-        tv_try_again.text = getString(R.string.bad_connection_info)
+        tv_try_again.text = getString(R.string.error_info)
         cpv_loading.visibility = View.GONE
         status_layout.visibility = View.VISIBLE
-
     }
-
 
 }

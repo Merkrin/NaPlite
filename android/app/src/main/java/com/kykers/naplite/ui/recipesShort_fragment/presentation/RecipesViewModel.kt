@@ -1,21 +1,14 @@
 package com.kykers.naplite.ui.recipesShort_fragment.presentation
 
-import android.graphics.Bitmap
-import android.media.audiofx.DynamicsProcessing
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.Config
 import androidx.paging.LivePagedListBuilder
 import com.kykers.naplite.business_layer.network.Event
 import com.kykers.naplite.business_layer.network.NetworkService
-import com.kykers.naplite.business_layer.network.RecipesApi
-import com.kykers.naplite.business_layer.network.wrappers.RecipesShortWrapper
 import com.kykers.naplite.business_layer.objects.Order
 import com.kykers.naplite.business_layer.objects.RecipeShort
 import com.kykers.naplite.ui.recipesShort_fragment.factory.RecipesSourceFactory
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
-import java.util.*
 
 
 class RecipesViewModel : ViewModel() {
@@ -37,46 +30,52 @@ class RecipesViewModel : ViewModel() {
 
     internal var recipesShortList = LivePagedListBuilder(factory, config).build()
 
-    internal val recipesShortEvent = MutableLiveData<Event<RecipesShortWrapper>>().apply {
-
+    internal val recipesShortEvent = MutableLiveData<Event<List<RecipeShort>>>().apply {
         value = Event.loading()
-
     }
 
-    //
 
-    internal inner class NetworkRepository {
 
-        /**
-         * Метод для загрузки @param amount элементов, начиная с @param skipAmount элемента
-         * в порядке @param order
-         * @see Order
-         * @see RecipesSourceFactory
-         *
-         *
-         * @author DmitriiShkudov
-         *
-         * */
-        suspend fun getRecipes(order: Order, skipAmount: Int, amount: Int): List<RecipeShort?> {
+        //
 
-            with (NetworkService.retrofitService().getRecipes(order, skipAmount)) {
+        internal inner class NetworkRepository {
 
-                if (data != null) {
+            /**
+             * Метод для загрузки @param amount элементов, начиная с @param skipAmount элемента
+             * в порядке @param order
+             * @see Order
+             * @see RecipesSourceFactory
+             *
+             *
+             * @author DmitriiShkudov
+             *
+             * */
 
-                    recipesShortEvent.postValue(Event.success(data))
-                    return data.recipes!!.subList(0, amount)
+            fun getRecipes(order: Order, skipAmount: Int, amount: Int): List<RecipeShort> { try {
 
-                } else {
+                    with(
+                        NetworkService.retrofitService().getRecipes(order, skipAmount).execute().body()
+                    ) {
 
-                    recipesShortEvent.postValue(Event.error(error))
+                        // Успешная загрузка
+                        if (this != null) {
+
+                            recipesShortEvent.postValue(Event.success(recipes))
+                            return recipes.subList(0, amount)
+
+                        } else {
+
+                            recipesShortEvent.postValue(Event.error(null))
+                            return emptyList()
+                        }
+                    }
+
+                } catch(e: Throwable) {
+
+                    recipesShortEvent.postValue(Event.error(null))
                     return emptyList()
 
                 }
-
             }
-
         }
-
-    }
-
 }
