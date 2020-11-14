@@ -8,6 +8,6 @@ API: собственный back-end
 ## Команда авторов
 
 - [Андрей Романюк](https://github.com/goga133)
-- [Дмитрий Шкудов](https://github.com/DmitriiShkudov)
+- [Дмитрий Шкудов](https://github.com/dashkudik)
 - [Никита Зубарев](https://github.com/zubarenik)
 - [Ирина Барчук](https://github.com/Merkrin)
