@@ -18,12 +18,14 @@ interface RecipesApi {
      * Получение рецепта по Id.
      */
     @GET("recipe/get?")
-    fun getRecipe(@Query("id") id: Int): Call<RecipeFull>
+
+    fun getRecipe(@Query("id") id: Int): Call<RecipesShortWrapper>
 
     /**
      * Получение рецептов через сортировку и количество пропущенных.
      */
     @GET("recipes/get?")
+
     fun getRecipes(
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0
@@ -34,6 +36,7 @@ interface RecipesApi {
      * Получение рецептов через сортировку, количество пропущенных и номер категории.
      */
     @GET("recipes/get?")
+
     fun getRecipes(
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0,
@@ -44,11 +47,13 @@ interface RecipesApi {
      * Получение рецептов по строковому запросу.
      */
     @GET("search/get?")
+
     fun getRecipes(
         @Query("q") query: String,
         @Query("order") order: Order = Order.DATE,
         @Query("skip") count: Int = 0,
     ): Call<RecipesShortWrapper>
+
 
     // TODO: @GET("categories")
 

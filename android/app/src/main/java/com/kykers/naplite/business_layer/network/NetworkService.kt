@@ -34,7 +34,6 @@ object NetworkService {
 
     private val client: OkHttpClient = OkHttpClient
         .Builder()
-        .readTimeout(3, TimeUnit.SECONDS)
         .addInterceptor(baseInterceptor)
         .build()
 
