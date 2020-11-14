@@ -1,7 +1,6 @@
 package com.kykers.naplite.ui.recipesShort_fragment.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,46 +8,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kykers.naplite.R
-import com.kykers.naplite.business_layer.network.Event.*
+import com.kykers.naplite.business_layer.network.NetworkRepository
+import com.kykers.naplite.business_layer.network.NetworkRepository.getRecipes
 import com.kykers.naplite.business_layer.network.Status.*
-import com.kykers.naplite.ui.recipesShort_fragment.adapter.RecipesShortAdapter
+import com.kykers.naplite.business_layer.objects.Order
+import com.kykers.naplite.business_layer.objects.RecipeShort
+import com.squareup.picasso.Picasso
+import dashkudov.handy_pager.HandyPager
 import kotlinx.android.synthetic.main.fragment_recipes_short.*
+import kotlinx.android.synthetic.main.item_recipe_short.view.*
+import java.time.ZoneId
 
 
 class RecipesFragment : Fragment() {
 
+    companion object {
 
-    private val recipesViewModel by lazy { ViewModelProvider(this).get(RecipesViewModel::class.java) }
+        const val PAGE_SIZE = 20
+        const val PREFETCH_DISTANCE = 18
 
-    private val recipesShortAdapter = RecipesShortAdapter()
-
-    private val recyclerLayoutManager by lazy { LinearLayoutManager(context) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        /** Реакция на изменения в листе */
-        recipesViewModel.recipesShortList.observe(viewLifecycleOwner) {
-
-            recipesShortAdapter.submitList(it)
-
-        }
-
-        /** Реакция на изменение состояний */
-        recipesViewModel.recipesShortEvent.observe(viewLifecycleOwner) {
-            
-            when (it.status) {
-
-                LOADING -> loading()
-                SUCCESS -> updated()
-                ERROR -> error()
-
-
-            }
-        }
 
         return inflater.inflate(R.layout.fragment_recipes_short, container, false)
     }
@@ -57,8 +42,7 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rv_recipes_short.layoutManager = recyclerLayoutManager
-        rv_recipes_short.adapter = recipesShortAdapter
+        integrateHandyPager()
 
     }
 
@@ -83,6 +67,54 @@ class RecipesFragment : Fragment() {
         tv_try_again.text = getString(R.string.error_info)
         cpv_loading.visibility = View.GONE
         status_layout.visibility = View.VISIBLE
+    }
+
+    private fun integrateHandyPager() {
+
+        HandyPager.Builder<RecipeShort>().
+        setOwner(viewLifecycleOwner).
+        setPageSize(PAGE_SIZE).
+        setPrefetchDistance(PREFETCH_DISTANCE).
+        setContainer(rv_recipes_short).
+        setItemView(R.layout.item_recipe_short).
+        setFactory {
+
+             from: Int, size: Int -> getRecipes(Order.COMMENTS, from, size)
+
+        }.
+        setOnBindListener(object: HandyPager.OnBindListener<RecipeShort> {
+
+            override fun onBind(itemView: View, item: RecipeShort, position: Int) {
+
+                with(itemView) {
+
+                    // TODO: исправить (на бэке?)
+                    val fixedRecipeTitle = item.title?.replace("&quot;", "\"")
+
+                    // TODO: исправить http на https на бэке
+                    val fixedUrl = item.image300XUrl?.replace("http", "https")
+                    Picasso.get().load(fixedUrl).into(civ_recipes_short)
+
+                    tv_recipes_short_title.text = fixedRecipeTitle
+                    tv_recipes_short_comments.text = item.comments.toString()
+                    tv_recipes_short_date.text =
+                        item.pubDateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                            .toString()
+
+                }
+            }
+        }).
+        setCallback(object: HandyPager.Callback {
+
+            override fun onError(from: Int, size: Int) { error() }
+
+            override fun onLoading(from: Int, size: Int) { loading() }
+
+            override fun onSuccess(from: Int, size: Int) { updated() }
+
+        }).
+        create()
+
     }
 
 }

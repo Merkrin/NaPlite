@@ -23,12 +23,12 @@
             android:layout_height="0dp">
         </androidx.appcompat.widget.AppCompatTextView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_weight="93"
             android:id="@+id/rv_recipes_short"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-        </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
