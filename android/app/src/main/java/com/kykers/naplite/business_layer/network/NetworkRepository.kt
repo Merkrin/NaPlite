@@ -5,27 +5,21 @@ import com.kykers.naplite.business_layer.objects.RecipeShort
 
 object NetworkRepository {
 
-    fun getRecipes(order: Order, skipAmount: Int, amount: Int): List<RecipeShort> { try {
-
+    fun getRecipes(order: Order, skipAmount: Int, amount: Int): List<RecipeShort> {
+        try {
             with(
                 NetworkService.retrofitService().getRecipes(order, skipAmount).execute().body()
             ) {
 
                 // Успешная загрузка
-                if (this != null) {
-
-                    return recipes.subList(0, amount)
-
-                } else {
-
-                    return emptyList()
-                }
+                return if (this != null)
+                    recipes.subList(0, amount)
+                else
+                    emptyList()
             }
 
-        } catch(e: Throwable) {
-
+        } catch (e: Throwable) {
             return emptyList()
-
         }
     }
 }

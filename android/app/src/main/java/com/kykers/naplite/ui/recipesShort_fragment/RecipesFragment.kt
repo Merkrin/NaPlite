@@ -1,16 +1,12 @@
-package com.kykers.naplite.ui.recipesShort_fragment.presentation
+package com.kykers.naplite.ui.recipesShort_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kykers.naplite.R
-import com.kykers.naplite.business_layer.network.NetworkRepository
 import com.kykers.naplite.business_layer.network.NetworkRepository.getRecipes
-import com.kykers.naplite.business_layer.network.Status.*
 import com.kykers.naplite.business_layer.objects.Order
 import com.kykers.naplite.business_layer.objects.RecipeShort
 import com.squareup.picasso.Picasso
@@ -70,7 +66,6 @@ class RecipesFragment : Fragment() {
     }
 
     private fun integrateHandyPager() {
-
         HandyPager.Builder<RecipeShort>().
         setOwner(viewLifecycleOwner).
         setPageSize(PAGE_SIZE).
@@ -78,21 +73,13 @@ class RecipesFragment : Fragment() {
         setContainer(rv_recipes_short).
         setItemView(R.layout.item_recipe_short).
         setFactory {
-
              from: Int, size: Int -> getRecipes(Order.COMMENTS, from, size)
-
-        }.
-        setOnBindListener(object: HandyPager.OnBindListener<RecipeShort> {
-
+        }.setOnBindListener(object: HandyPager.OnBindListener<RecipeShort> {
             override fun onBind(itemView: View, item: RecipeShort, position: Int) {
-
                 with(itemView) {
+                    val fixedRecipeTitle = item.title
 
-                    // TODO: исправить (на бэке?)
-                    val fixedRecipeTitle = item.title?.replace("&quot;", "\"")
-
-                    // TODO: исправить http на https на бэке
-                    val fixedUrl = item.image300XUrl?.replace("http", "https")
+                    val fixedUrl = item.image300XUrl
                     Picasso.get().load(fixedUrl).into(civ_recipes_short)
 
                     tv_recipes_short_title.text = fixedRecipeTitle
@@ -100,7 +87,6 @@ class RecipesFragment : Fragment() {
                     tv_recipes_short_date.text =
                         item.pubDateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
                             .toString()
-
                 }
             }
         }).
