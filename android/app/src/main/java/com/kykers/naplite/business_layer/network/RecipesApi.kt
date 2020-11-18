@@ -19,7 +19,7 @@ interface RecipesApi {
      */
     @GET("recipe/get?")
 
-    fun getRecipe(@Query("id") id: Int): Call<RecipesShortWrapper>
+    fun getRecipe(@Query("id") id: Int): Call<RecipeFull>
 
     /**
      * Получение рецептов через сортировку и количество пропущенных.
