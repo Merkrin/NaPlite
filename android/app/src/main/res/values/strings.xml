@@ -6,5 +6,8 @@
 
 
     <string name="error_info">Ошибка, повторяем попытку</string>
+    <string name="title_categories">Категории</string>
+    <string name="search">Искать</string>
+    <string name="chosen_category">Выбранная категория: </string>
 
 </resources>

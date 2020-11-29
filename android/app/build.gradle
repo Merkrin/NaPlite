@@ -78,7 +78,4 @@ dependencies {
     // Circular progress view
     implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
 
-    implementation 'com.github.dashkudik:HandyPager:2.1'
-
-
 }

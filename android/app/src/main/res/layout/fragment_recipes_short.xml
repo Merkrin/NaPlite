@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout
+    android:id="@+id/root"
     android:background="@color/background_color"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipesShort_fragment.presentation.RecipesFragment">
-
+    tools:context=".ui.main_activity.recipes_short.RecipesFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:gravity="center"
-            android:text="Всякая всячина (фильтры и т.п)"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_weight="7"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-        </androidx.appcompat.widget.AppCompatTextView>
+
+            <ImageView
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/filter"
+                android:id="@+id/btn_options"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </ImageView>
+
+            <SearchView
+                android:id="@+id/search"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </SearchView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout
             android:layout_weight="93"
@@ -78,9 +94,38 @@
 
         </RelativeLayout>
 
-
-
     </FrameLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/options"
+        android:alpha="0"
+        android:layout_gravity="center"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/back_options">
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:id="@+id/tv_category"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/chosen_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:id="@+id/spinner_sort"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+        </Spinner>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </FrameLayout>

@@ -1,6 +1,8 @@
 package com.kykers.naplite.business_layer.network
 
+import com.kykers.naplite.business_layer.network.wrappers.CategoriesWrapper
 import com.kykers.naplite.business_layer.network.wrappers.RecipesShortWrapper
+import com.kykers.naplite.business_layer.objects.Category
 import com.kykers.naplite.business_layer.objects.Order
 import com.kykers.naplite.business_layer.objects.RecipeFull
 import retrofit2.Call
@@ -55,6 +57,9 @@ interface RecipesApi {
     ): Call<RecipesShortWrapper>
 
 
-    // TODO: @GET("categories")
+    @GET("categories/")
+
+    fun getCategories(): Call<List<Category>>
+
 
 }
